@@ -24,12 +24,12 @@ export class Boot extends Scene
 
     preload()
     {
-        this.load.image('fondo', 'assets/bg.png');
+        this.load.image('fondo-cielo', 'assets/bg.png');
     }
 
     create()
     {
-        this.add.image(0, 0, 'fondo').setOrigin(0, 0);
+        this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0);
         this.txt.create();
 
         this.input.on('pointerdown', () => this.scene.start('Preloader'));

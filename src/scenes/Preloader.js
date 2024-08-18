@@ -13,8 +13,8 @@ export class Preloader extends Scene
         const widthScreen = this.sys.game.config.width;
         const heightScreen = this.sys.game.config.height;
 
-        this.load.image('fondo', 'assets/bg.png');
-        this.add.image(0, 0, 'fondo').setOrigin(0, 0);
+        this.load.image('fondo-cielo', 'assets/bg.png');
+        this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0);
 
         this.txt = new Textos(this, {
             x: Math.floor(widthScreen / 2),
@@ -51,7 +51,8 @@ export class Preloader extends Scene
     {
         this.load.setPath('assets');
 
-        this.load.image('fondo', 'bg.png');
+        this.load.image('fondo-cielo', 'bg.png');
+        this.load.image('fondo-suelo', 'fondo-suelo-rayCast.png');
 
         //this.load.bitmapFont('font-fire', '/img/azo-fire.png', '/img/azo-fire.xml');
 

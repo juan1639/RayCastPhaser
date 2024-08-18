@@ -77,7 +77,16 @@ export class Settings
         controles: 800,
         textos: 900
     };
-    
+
+    static colores =
+    {
+        BLANCO: "245, 245, 245",
+        NEGRO: "5, 5, 5",
+        GRIS_SUELO: "70, 75, 75",
+        PARED_OSCURO: "150, 150, 150",
+        PARED_CLARO: "128, 128, 128",
+    };
+
     static audio =
     {
         numKey: null,

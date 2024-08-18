@@ -13,3 +13,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+canvas {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #111;
+}
