@@ -53,6 +53,7 @@ export class Preloader extends Scene
 
         this.load.image('fondo-cielo', 'bg.png');
         this.load.image('fondo-suelo', 'fondo-suelo-rayCast.png');
+        this.load.image('particula1', '/img/particula1.png');
 
         //this.load.bitmapFont('font-fire', '/img/azo-fire.png', '/img/azo-fire.xml');
 
