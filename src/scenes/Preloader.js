@@ -53,7 +53,15 @@ export class Preloader extends Scene
 
         this.load.image('fondo-cielo', 'bg.png');
         this.load.image('fondo-suelo', 'fondo-suelo-rayCast.png');
+
         this.load.image('particula1', '/img/particula1.png');
+
+        this.load.spritesheet('radio-buttons', '/img/radio-buttons-ssheet.png', {frameWidth: 50, frameHeight: 50});
+        this.load.spritesheet('boton-fullscreen', '/img/boton-fullscreen.png', {frameWidth: 64, frameHeight: 64});
+        this.load.image('cruceta', '/img/cruceta-up.png');
+
+        this.load.image('ui-1', '/img/ui-1.png');
+        this.load.image('ui-newgame', '/img/ui-newgame.png');
 
         //this.load.bitmapFont('font-fire', '/img/azo-fire.png', '/img/azo-fire.xml');
 

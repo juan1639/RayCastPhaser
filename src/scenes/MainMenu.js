@@ -16,7 +16,7 @@ export class MainMenu extends Scene
         this.botoninicio = new BotonNewGame(this, {
             left: Math.floor(this.sys.game.config.width / 2),
             top: Math.floor(this.sys.game.config.height / 1.25),
-            id: 'boton-nueva-partida',
+            id: 'ui-newgame',
             scX: 0.6, scY: 0.5, angle: 1, originX: 0.5, originY: 0.5,
             texto: ' New Game ', nextScene: 'Game'
         });
