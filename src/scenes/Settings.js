@@ -48,9 +48,8 @@ export class Settings
 
     static depth =
     {
-        fondo: 0,
-        lineas: 100,
-        pared: 200,
+        fondo: -900,
+        lineas: 0,
         efectos: 300,
         botones: 650,
         marcadores: 700,
@@ -108,10 +107,10 @@ export class Settings
 
     static escenarioMedidas =
     {
-        TILE_X: 32,// px
-		TILE_Y: 32,// px
-		NRO_COLUMNAS: arrayEscenario[0].length,
-		NRO_FILAS: arrayEscenario.length,
+        TILE_X: Settings.tileSize.X,// px
+		TILE_Y: Settings.tileSize.Y,// px
+		NRO_COLUMNAS: Settings.arrayEscenario[0].length,
+		NRO_FILAS: Settings.arrayEscenario.length,
     };
 
     static escenarioTotales =
@@ -135,7 +134,7 @@ export class Settings
     
     // Lo Normal=1, mas distancia mejor rendimiento, peor aspecto
     static DISTANCIA_ENTRE_RAYOS = 1;
-    static NRO_RAYOS = WIDTH_SCREEN;
+    static NRO_RAYOS = Settings.escenarioTotales.WIDTH_SCREEN;
 
     static NRO_TEXTURAS_PARED = 14;
 
@@ -211,6 +210,16 @@ export class Settings
         return Settings.N_COLUMNAS;
     }
 
+    static getVariablesModo3D()
+    {
+        return Settings.variables.modo3D;
+    }
+
+    static getVariablesRenderConTextura()
+    {
+        return Settings.variables.renderConTextura;
+    }
+
     static getFPS()
     {
         return Settings.FPS;
@@ -245,12 +254,7 @@ export class Settings
     {
         return Settings.cameraScores;
     }
-
-    static getDepth()
-    {
-        return Settings.depth;
-    }
-
+    
     static getAudio()
     {
         return Settings.audio;
@@ -263,6 +267,16 @@ export class Settings
     static setFPS(fps)
     {
         Settings.FPS = fps;
+    }
+
+    static setVariablesModo3D(bool)
+    {
+        Settings.variables.modo3D = bool;
+    }
+
+    static setVariablesRenderConTextura(bool)
+    {
+        Settings.variables.renderConTextura = bool;
     }
 
     static setEstadosPreJuego(bool)

@@ -32,7 +32,7 @@ export class MainMenu extends Scene
             elastic: Math.floor(this.sys.game.config.height / 3.5), dura: 3000
         });
 
-        this.txtRecords = new Textos(this, {
+        /* this.txtRecords = new Textos(this, {
             x: Math.floor(this.sys.game.config.width / 2),
             y: 0,
             txt: ' Tabla records ',
@@ -41,7 +41,7 @@ export class MainMenu extends Scene
             shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
             bool1: false, bool2: true, origin: [0.5, 0.5],
             elastic: Math.floor(this.sys.game.config.height / 1.7), dura: 3000
-        });
+        }); */
     }
 
     preload() {}

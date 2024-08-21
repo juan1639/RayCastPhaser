@@ -1,4 +1,7 @@
 import { Scene } from 'phaser';
+import { Settings } from './Settings';
+import { Jugador } from '../components/Jugador';
+import { play_sonidos } from '../functions/Functions';
 
 export class Game extends Scene
 {
@@ -9,18 +12,20 @@ export class Game extends Scene
 
     init()
     {
-
+        this.jugador = new Jugador(this);
     }
-
+    
     preload()
-    {}
+    {
+        Settings.audio.numKey = this.sound.add('numkey');
+    }
 
     create ()
     {
         //this.cameras.main.setBackgroundColor(0x00ff00);
+        this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
 
-        this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0);
-        this.add.image(0, 0, 'fondo-cielo').setScale(1, 0.5).setOrigin(0, 0);
+        this.jugador.create();
 
         this.graphics = this.add.graphics();
 
@@ -34,11 +39,32 @@ export class Game extends Scene
 
         this.input.once('pointerdown', () => {
 
+            play_sonidos(Settings.audio.numKey, false, 0.9);
             this.scene.start('GameOver');
         });
     }
 
     update()
+    {
+        this.jugador.update();
+
+        if (Settings.getVariablesModo3D())
+        {
+            this.renderiza3D();
+            
+        }
+        else
+        {
+            this.renderiza2D();
+        }
+    }
+
+    renderiza2D()
+    {
+
+    }
+
+    renderiza3D()
     {
         Phaser.Geom.Line.Rotate(this.line1, 0.02);
 
