@@ -12,8 +12,8 @@ export class Settings
 
     static screen =
     {
-        WIDTH: 1024,
-        HEIGHT: 768,
+        WIDTH: 1280,
+        HEIGHT: 960,
         ESC_BOUNDS_X: 1.35,
         ESC_BOUNDS_Y: 1.90,
     };

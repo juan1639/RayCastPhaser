@@ -1,5 +1,6 @@
 import { play_sonidos } from "../functions/Functions";
 import { Settings } from "../scenes/Settings";
+import { getEscalaFondos } from "../functions/Functions";
 
 export class Jugador
 {
@@ -37,19 +38,37 @@ export class Jugador
                 this.banderaCambioModo3D = true;
             }, []);
 
+            const escala = getEscalaFondos(
+                Settings.escenarioTotales.WIDTH_SCREEN,
+                Settings.escenarioTotales.HEIGHT_SCREEN,
+                this.relatedScene.fondoSuelo.width,
+                this.relatedScene.fondoSuelo.height
+            );
+
             if (Settings.getVariablesModo3D())
             {
                 Settings.setVariablesModo3D(false);
 
-                this.relatedScene.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
+                this.relatedScene.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo)
+                    .setScale(escala[0], escala[1]);
+                
+                this.relatedScene.escenario.get().children.iterate(tile => {
+                    tile.setVisible(true);
+                });
             }
             else
             {
                 Settings.setVariablesModo3D(true);
 
-                this.relatedScene.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
-                this.relatedScene.add.image(0, 0, 'fondo-cielo').setScale(1, 0.5).setOrigin(0, 0)
-                    .setDepth(Settings.depth.fondo);
+                this.relatedScene.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo)
+                    .setScale(escala[0], escala[1]);
+
+                this.relatedScene.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0).setDepth(Settings.depth.fondo)
+                    .setScale(escala[0], escala[1] / 2);
+                
+                this.relatedScene.escenario.get().children.iterate(tile => {
+                    tile.setVisible(false);
+                });
             }
         }
     }

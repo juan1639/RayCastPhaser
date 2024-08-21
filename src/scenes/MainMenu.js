@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
 import { Textos } from '../components/Textos.js';
-import { play_sonidos, particulas } from '../functions/Functions.js';
+import { getEscalaFondos, play_sonidos, particulas } from '../functions/Functions.js';
 import { BotonNewGame } from '../components/BotonNewGame.js';
 import { Settings } from './Settings.js';
 
@@ -50,8 +50,16 @@ export class MainMenu extends Scene
     {
         const aparecerBoton = 1800; // 1800
 
-        this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
-
+        this.fondo = this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
+        const escala = getEscalaFondos(
+            Settings.escenarioTotales.WIDTH_SCREEN,
+            Settings.escenarioTotales.HEIGHT_SCREEN,
+            this.fondo.width,
+            this.fondo.height
+        );
+        this.fondo = this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0).setDepth(Settings.depth.fondo)
+            .setScale(escala[0], escala[1]);
+        
         this.txt.create();
         this.txt.get().setDepth(Settings.depth.textos);
 

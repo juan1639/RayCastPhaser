@@ -1,6 +1,11 @@
 import { Settings } from "../scenes/Settings.js";
 import { Textos } from "../components/Textos.js";
 
+function getEscalaFondos(screenWidth, screenHeight, x, y)
+{
+  return [screenWidth / x, screenHeight / y];
+}
+
 function particulas(x, y, particula, vel, span, size, color, sprite, bool, scene)
 {
   const partis = scene.add.particles(x, y, particula, {
@@ -39,6 +44,7 @@ function play_sonidos(id, loop, volumen)
 }
 
 export {
+  getEscalaFondos,
   particulas,
   play_sonidos
 };

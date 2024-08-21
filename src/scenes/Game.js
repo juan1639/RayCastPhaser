@@ -1,7 +1,8 @@
 import { Scene } from 'phaser';
 import { Settings } from './Settings';
 import { Jugador } from '../components/Jugador';
-import { play_sonidos } from '../functions/Functions';
+import { getEscalaFondos, play_sonidos } from '../functions/Functions';
+import { Escenario } from '../components/Escenario';
 
 export class Game extends Scene
 {
@@ -12,6 +13,7 @@ export class Game extends Scene
 
     init()
     {
+        this.escenario = new Escenario(this);
         this.jugador = new Jugador(this);
     }
     
@@ -23,8 +25,23 @@ export class Game extends Scene
     create ()
     {
         //this.cameras.main.setBackgroundColor(0x00ff00);
-        this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
 
+        this.fondoSuelo = this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
+        const escala = getEscalaFondos(
+            Settings.escenarioTotales.WIDTH_SCREEN,
+            Settings.escenarioTotales.HEIGHT_SCREEN,
+            this.fondoSuelo.width,
+            this.fondoSuelo.height
+        );
+
+        this.fondoSuelo = this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo)
+            .setScale(escala[0], escala[1]);
+
+        this.escenario.create();
+        this.escenario.get().children.iterate(tile => {
+            tile.setVisible(true);
+        });
+        
         this.jugador.create();
 
         this.graphics = this.add.graphics();

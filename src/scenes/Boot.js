@@ -1,5 +1,7 @@
 import { Scene } from 'phaser';
+import { Settings } from './Settings.js';
 import { Textos } from "../components/Textos.js";
+import { getEscalaFondos } from '../functions/Functions.js';
 
 export class Boot extends Scene
 {
@@ -29,7 +31,16 @@ export class Boot extends Scene
 
     create()
     {
-        this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0);
+        this.fondo = this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0);
+        const escala = getEscalaFondos(
+            Settings.escenarioTotales.WIDTH_SCREEN,
+            Settings.escenarioTotales.HEIGHT_SCREEN,
+            this.fondo.width,
+            this.fondo.height
+        );
+        this.fondo = this.add.image(0, 0, 'fondo-cielo').setOrigin(0, 0)
+            .setScale(escala[0], escala[1]);
+        
         this.txt.create();
 
         this.input.on('pointerdown', () => this.scene.start('Preloader'));

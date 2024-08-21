@@ -8,20 +8,20 @@ import { Preloader } from './scenes/Preloader';
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
     type: Phaser.AUTO,
-    width: 1024,
-    height: 768,
+    width: 1280,//1024
+    height: 960,//768
     parent: 'game-container',
     backgroundColor: '#870',
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    /* physics: {
+    physics: {
         default: 'arcade',
         arcade: {
           debug: false
         }
-    }, */
+    },
     pixelArt: false,
     scene: [
         Boot,
