@@ -6,6 +6,19 @@ function getEscalaFondos(screenWidth, screenHeight, x, y)
   return [screenWidth / x, screenHeight / y];
 }
 
+function normalizaAngulo(angRotacion)
+{
+  if (angRotacion < 0) {
+    return angRotacion + Math.PI * 2;
+  }
+
+  if (angRotacion > Math.PI * 2) {
+    return angRotacion - Math.PI * 2;
+  }
+
+  return angRotacion;
+}
+
 function particulas(x, y, particula, vel, span, size, color, sprite, bool, scene)
 {
   const partis = scene.add.particles(x, y, particula, {
@@ -45,6 +58,7 @@ function play_sonidos(id, loop, volumen)
 
 export {
   getEscalaFondos,
+  normalizaAngulo,
   particulas,
   play_sonidos
 };

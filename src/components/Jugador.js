@@ -1,6 +1,7 @@
 import { play_sonidos } from "../functions/Functions";
 import { Settings } from "../scenes/Settings";
 import { getEscalaFondos } from "../functions/Functions";
+import { Escenario } from "./Escenario";
 
 export class Jugador
 {
@@ -49,6 +50,7 @@ export class Jugador
     {
         this.cambiarModo3D();
         this.leerTeclado();
+        this.actualiza();
     }
 
     leerTeclado()
@@ -76,6 +78,29 @@ export class Jugador
             
         //console.log(this.jugador.getData('avanza'));
         //console.log(this.jugador.getData('gira'));
+    }
+
+    actualiza()
+    {
+        const nuevaX = this.jugador.getData('x') + this.jugador.getData('avanza') * Math.cos(this.getData('anguloRotacion')) *
+            this.getData('velMovimiento');
+
+        const nuevaY = this.jugador.getData('y') + this.jugador.getData('avanza') * Math.sin(this.getData('anguloRotacion')) *
+            this.getData('velMovimiento');
+        
+        const tryX = Math.floor(nuevaX / Settings.escenarioMedidas.TILE_X);
+        const tryY = Math.floor(nuevaY / Settings.escenarioMedidas.TILE_Y);
+
+        if (!Escenario.checkColision(tryX, tryY)) {
+
+            this.jugador.setData('x', nuevaX);
+            this.jugador.setData('y', nuevaY);
+        }
+
+        this.jugador.setData('anguloRotacion',
+            this.jugador.getData('anguloRotacion') + this.jugador.getData('gira') * this.jugador.getData('velGiro'));
+        
+        this.jugador.setData('anguloRotacion', normalizaAngulo(this.jugador.getData('anguloRotacion')));
     }
 
     cambiarModo3D()
