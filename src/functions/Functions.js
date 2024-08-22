@@ -6,6 +6,11 @@ function getEscalaFondos(screenWidth, screenHeight, x, y)
   return [screenWidth / x, screenHeight / y];
 }
 
+function getRadianes(grados)
+{
+  return (grados * Math.PI) / 180;
+}
+
 function normalizaAngulo(angRotacion)
 {
   if (angRotacion < 0) {
@@ -58,6 +63,7 @@ function play_sonidos(id, loop, volumen)
 
 export {
   getEscalaFondos,
+  getRadianes,
   normalizaAngulo,
   particulas,
   play_sonidos

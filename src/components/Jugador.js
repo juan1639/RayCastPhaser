@@ -1,7 +1,11 @@
-import { play_sonidos } from "../functions/Functions";
 import { Settings } from "../scenes/Settings";
-import { getEscalaFondos } from "../functions/Functions";
 import { Escenario } from "./Escenario";
+import {
+    play_sonidos,
+    getEscalaFondos,
+    normalizaAngulo,
+    getRadianes
+} from "../functions/Functions";
 
 export class Jugador
 {
@@ -29,14 +33,14 @@ export class Jugador
 
         this.jugador.setTint(0xffff00).setDepth(Settings.depth.jugador2D);
 
-        this.jugador.setData('x', x);
-        this.jugador.setData('y', y);
+        this.jugador.x = x;
+        this.jugador.y = y;
         this.jugador.setData('ancho', ancho);
         this.jugador.setData('alto', alto);
         this.jugador.setData('avanza', avanza);
         this.jugador.setData('gira', gira);
-        this.jugador.setData('anguloRotacion', anguloRotacion);
-        this.jugador.setData('velGiro', velGiro);
+        this.jugador.setData('anguloRotacion', getRadianes(anguloRotacion));
+        this.jugador.setData('velGiro', getRadianes(velGiro));
         this.jugador.setData('velMovimiento', velMovimiento);
 
         this.banderaCambioModo3D = true;
@@ -49,11 +53,11 @@ export class Jugador
     update()
     {
         this.cambiarModo3D();
-        this.leerTeclado();
+        this.leerTecladoParaMoverse();
         this.actualiza();
     }
 
-    leerTeclado()
+    leerTecladoParaMoverse()
     {
         this.jugador.setData('avanza', 0);
         this.jugador.setData('gira', 0);
@@ -76,25 +80,27 @@ export class Jugador
             this.jugador.setData('gira', -1);
         }
             
-        //console.log(this.jugador.getData('avanza'));
-        //console.log(this.jugador.getData('gira'));
+        console.log(this.jugador.getData('avanza'));
+        console.log(this.jugador.getData('gira'));
     }
 
     actualiza()
     {
-        const nuevaX = this.jugador.getData('x') + this.jugador.getData('avanza') * Math.cos(this.getData('anguloRotacion')) *
-            this.getData('velMovimiento');
+        const nuevaX = this.jugador.x + this.jugador.getData('avanza') * Math.cos(this.jugador.getData('anguloRotacion')) *
+            this.jugador.getData('velMovimiento');
 
-        const nuevaY = this.jugador.getData('y') + this.jugador.getData('avanza') * Math.sin(this.getData('anguloRotacion')) *
-            this.getData('velMovimiento');
+        const nuevaY = this.jugador.y + this.jugador.getData('avanza') * Math.sin(this.jugador.getData('anguloRotacion')) *
+            this.jugador.getData('velMovimiento');
+        
+        console.log(nuevaX, nuevaY);
         
         const tryX = Math.floor(nuevaX / Settings.escenarioMedidas.TILE_X);
         const tryY = Math.floor(nuevaY / Settings.escenarioMedidas.TILE_Y);
 
         if (!Escenario.checkColision(tryX, tryY)) {
 
-            this.jugador.setData('x', nuevaX);
-            this.jugador.setData('y', nuevaY);
+            this.jugador.x = nuevaX;
+            this.jugador.y = nuevaY;
         }
 
         this.jugador.setData('anguloRotacion',
