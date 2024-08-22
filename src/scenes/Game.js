@@ -38,6 +38,8 @@ export class Game extends Scene
     {
         //this.cameras.main.setBackgroundColor(0x00ff00);
 
+        this.graphics = this.add.graphics();
+
         this.fondoSuelo = this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
         const escala = getEscalaFondos(
             Settings.escenarioTotales.WIDTH_SCREEN,
@@ -56,9 +58,7 @@ export class Game extends Scene
         
         this.jugador.create();
         this.jugador.get().setVisible(true);
-
-        this.graphics = this.add.graphics();
-
+        
         this.line1 = new Phaser.Geom.Line(260, 200, 450, 450);
         this.line2 = new Phaser.Geom.Line(300, 400, 500, 500);
 

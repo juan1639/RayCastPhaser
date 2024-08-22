@@ -43,6 +43,8 @@ export class Jugador
         this.jugador.setData('velGiro', getRadianes(velGiro));
         this.jugador.setData('velMovimiento', velMovimiento);
 
+        this.dibujaLineaDir();
+
         this.banderaCambioModo3D = true;
 
         this.controles = this.relatedScene.input.keyboard.createCursorKeys();
@@ -73,11 +75,11 @@ export class Jugador
         
         if (this.controles.left.isDown) {
             
-            this.jugador.setData('gira', 1);
+            this.jugador.setData('gira', -1);
         }
         else if (this.controles.right.isDown)
         {
-            this.jugador.setData('gira', -1);
+            this.jugador.setData('gira', 1);
         }
             
         console.log(this.jugador.getData('avanza'));
@@ -107,6 +109,23 @@ export class Jugador
             this.jugador.getData('anguloRotacion') + this.jugador.getData('gira') * this.jugador.getData('velGiro'));
         
         this.jugador.setData('anguloRotacion', normalizaAngulo(this.jugador.getData('anguloRotacion')));
+
+        this.dibujaLineaDir();
+    }
+
+    dibujaLineaDir()
+    {
+        this.relatedScene.graphics.clear();
+
+        this.lineaDir = new Phaser.Geom.Line(
+            this.jugador.x,
+            this.jugador.y,
+            this.jugador.x + Math.cos(this.jugador.getData('anguloRotacion')) * 40,
+            this.jugador.y + Math.sin(this.jugador.getData('anguloRotacion')) * 40
+        );
+
+        this.relatedScene.graphics.lineStyle(2, 0xaaff00);
+        this.relatedScene.graphics.strokeLineShape(this.lineaDir);
     }
 
     cambiarModo3D()
