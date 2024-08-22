@@ -14,7 +14,19 @@ export class Game extends Scene
     init()
     {
         this.escenario = new Escenario(this);
-        this.jugador = new Jugador(this);
+
+        this.jugador = new Jugador(this, {
+            
+            x: Settings.JUGADOR_INI.X,
+            y: Settings.JUGADOR_INI.Y,
+            ancho: Settings.JUGADOR_INI.ANCHO2D,
+            alto: Settings.JUGADOR_INI.ALTO2D,
+            avanza: Settings.JUGADOR_INI.AVANZA,
+            gira: Settings.JUGADOR_INI.GIRA_INI,
+            anguloRotacion: Settings.JUGADOR_INI.ANGULO_ROTACION_INI,
+            velGiro: Settings.JUGADOR_INI.VEL_GIRO,
+            velMovimiento: Settings.JUGADOR_INI.VEL_MOVIMIENTO
+        });
     }
     
     preload()
@@ -43,6 +55,7 @@ export class Game extends Scene
         });
         
         this.jugador.create();
+        this.jugador.get().setVisible(true);
 
         this.graphics = this.add.graphics();
 

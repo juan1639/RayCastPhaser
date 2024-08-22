@@ -23,7 +23,7 @@ export class Escenario {
                         (x * Settings.escenarioMedidas.TILE_X),
                         (y * Settings.escenarioMedidas.TILE_Y),
                         'tile-gris'
-                    ).setOrigin(0, 0).setScale(0.5);
+                    ).setOrigin(0, 0).setScale(0.5).setDepth(Settings.depth.escenario2D);
                 }
             }
         }

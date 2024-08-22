@@ -49,6 +49,8 @@ export class Settings
     static depth =
     {
         fondo: -900,
+        escenario2D: -700,
+        jugador2D: -500,
         lineas: 0,
         efectos: 300,
         botones: 650,

@@ -76,6 +76,8 @@ export class Preloader extends Scene
 
         this.load.image('tile-gris', '/img/tile-gris.png');
 
+        this.load.image('jugador-mapa', '/img/jugador-mapa.png');
+
         //this.load.bitmapFont('font-fire', '/img/azo-fire.png', '/img/azo-fire.xml');
 
         //  Archivos de audio
