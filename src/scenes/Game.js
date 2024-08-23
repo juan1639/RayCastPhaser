@@ -41,6 +41,7 @@ export class Game extends Scene
             const incAng = Settings.FOV / Settings.NRO_RAYOS;
             const ang = getAngInicialCadaRayo(Settings.JUGADOR_INI.ANGULO_ROTACION_INI) + (incAng * i);
             const distPlanoProy = (Settings.escenarioTotales.WIDTH_SCREEN / 2) / Math.tan(Settings.FOV_MITAD_GRADOS);
+            //const distPlanoProy = (Settings.screen.WIDTH / 2) / Math.tan(Settings.FOV_MITAD_GRADOS);
 
             this.rayo.push(new Rayo(this, {
 
@@ -80,8 +81,8 @@ export class Game extends Scene
 
         this.fondoSuelo = this.add.image(0, 0, 'fondo-suelo').setOrigin(0, 0).setDepth(Settings.depth.fondo);
         const escala = getEscalaFondos(
-            Settings.escenarioTotales.WIDTH_SCREEN,
-            Settings.escenarioTotales.HEIGHT_SCREEN,
+            Settings.screen.WIDTH,
+            Settings.screen.HEIGHT,
             this.fondoSuelo.width,
             this.fondoSuelo.height
         );

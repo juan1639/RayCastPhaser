@@ -137,8 +137,8 @@ export class Jugador
             }, []);
 
             const escala = getEscalaFondos(
-                Settings.escenarioTotales.WIDTH_SCREEN,
-                Settings.escenarioTotales.HEIGHT_SCREEN,
+                Settings.screen.WIDTH,
+                Settings.screen.HEIGHT,
                 this.relatedScene.fondoSuelo.width,
                 this.relatedScene.fondoSuelo.height
             );

@@ -1,4 +1,3 @@
-import { getRadianes } from "../functions/Functions";
 
 export class Settings
 {
@@ -21,12 +20,12 @@ export class Settings
 
     static tileSize =
     {
-        X: 32,
-        Y: 32,
+        X: 64,
+        Y: 64,
     };
 
-    static N_FILAS = Math.floor(Settings.screen.HEIGHT / Settings.tileSize.Y);
-    static N_COLUMNAS = Math.floor(Settings.screen.WIDTH / Settings.tileSize.X);
+    //static N_FILAS = Math.floor(Settings.screen.HEIGHT / Settings.tileSize.Y);
+    //static N_COLUMNAS = Math.floor(Settings.screen.WIDTH / Settings.tileSize.X);
 
     static JUGADOR_INI =
     {
@@ -148,7 +147,7 @@ export class Settings
     static DISTANCIA_ENTRE_RAYOS = 1;
     static GROSOR_LINEA_PSEUDO3D = 2;
     //static NRO_RAYOS = 512;
-    static NRO_RAYOS = Settings.escenarioTotales.WIDTH_SCREEN;
+    static NRO_RAYOS = Settings.screen.WIDTH;
 
     static MODIFICACION_DIST_PLANO_PROYECCION = 0.5;// 1 = Default
 

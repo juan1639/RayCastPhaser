@@ -163,16 +163,16 @@ export class Rayo {
 
     renderParedPseudo3D(colorPared)
     {
-        const altoTile = Settings.escenarioTotales.HEIGHT_SCREEN;
+        const altoTile = Settings.screen.HEIGHT;
 		const alturaMuro = (altoTile / this.rayo.distancia) *
             (this.rayo.distanciaPlanoProyeccion * Settings.MODIFICACION_DIST_PLANO_PROYECCION);
 		//console.log(altoTile, alturaMuro);
 
-	    const y0 = (Settings.escenarioTotales.HEIGHT_SCREEN / 2) - (alturaMuro / 2);
+	    const y0 = (Settings.screen.HEIGHT / 2) - (alturaMuro / 2);
 	    const y1 = y0 + alturaMuro;
 	    //console.log(y0 + ": " + y1);
 	    
-	    const x = (Settings.escenarioTotales.WIDTH_SCREEN / Settings.NRO_RAYOS) * this.rayo.columna;
+	    const x = (Settings.screen.WIDTH / Settings.NRO_RAYOS) * this.rayo.columna;
 	    const alturaLinea = Math.abs(y1 - y0);
 
 	    const altura = 0;
@@ -274,7 +274,8 @@ export class Rayo {
 
 	    } while (!colisionH && casillaX < Settings.escenarioMedidas.NRO_COLUMNAS &&
 	    		casillaY < Settings.escenarioMedidas.NRO_FILAS && casillaX >= 0 && casillaY >= 0);
-	    
+	    //while (!colisionH && siguienteYHorizontal < 2000 && siguienteYHorizontal >= 0);
+
 	    return false;
     }
 
@@ -354,7 +355,8 @@ export class Rayo {
 	
 	    } while (!colisionV && casillaX < Settings.escenarioMedidas.NRO_COLUMNAS &&
 	    		casillaY < Settings.escenarioMedidas.NRO_FILAS && casillaX >= 0 && casillaY >= 0);
-		
+		//while (!colisionV && siguienteXVertical < 2000 && siguienteXVertical >= 0);
+
 		return false;
     }
 
