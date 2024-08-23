@@ -1,3 +1,4 @@
+import { getRadianes } from "../functions/Functions";
 
 export class Settings
 {
@@ -35,8 +36,8 @@ export class Settings
 		ALTO2D: 6,
 		AVANZA: 0,
 		GIRA_INI: 0,
-		ANGULO_ROTACION_INI: 45,
-		VEL_GIRO: 3,
+		ANGULO_ROTACION_INI: getRadianes(90),
+		VEL_GIRO: getRadianes(3),
 		VEL_MOVIMIENTO: 4,
     };
 
@@ -131,7 +132,7 @@ export class Settings
 		PUERTA: 5,
     };
 
-    static FOV = 60;
+    static FOV = getRadianes(60);
     static FOV_MITAD = Settings.FOV / 2;
     
     // Lo Normal=1, mas distancia mejor rendimiento, peor aspecto

@@ -24,6 +24,11 @@ function normalizaAngulo(angRotacion)
   return angRotacion;
 }
 
+function getAngInicialCadaRayo(angRotacion)
+{
+  return angRotacion - Settings.FOV_MITAD;
+}
+
 function particulas(x, y, particula, vel, span, size, color, sprite, bool, scene)
 {
   const partis = scene.add.particles(x, y, particula, {
@@ -65,6 +70,7 @@ export {
   getEscalaFondos,
   getRadianes,
   normalizaAngulo,
+  getAngInicialCadaRayo,
   particulas,
   play_sonidos
 };

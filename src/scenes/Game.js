@@ -1,8 +1,13 @@
 import { Scene } from 'phaser';
 import { Settings } from './Settings';
-import { Jugador } from '../components/Jugador';
-import { getEscalaFondos, play_sonidos } from '../functions/Functions';
 import { Escenario } from '../components/Escenario';
+import { Jugador } from '../components/Jugador';
+import { Rayo } from '../components/Rayo';
+import {
+    getAngInicialCadaRayo,
+    getEscalaFondos,
+    play_sonidos
+} from '../functions/Functions';
 
 export class Game extends Scene
 {
@@ -27,6 +32,39 @@ export class Game extends Scene
             velGiro: Settings.JUGADOR_INI.VEL_GIRO,
             velMovimiento: Settings.JUGADOR_INI.VEL_MOVIMIENTO
         });
+
+        this.rayo = [];
+
+        for (let i = 0; i < Settings.NRO_RAYOS; i ++)
+        {
+            //const i = 0;
+            const incAng = Settings.FOV / Settings.NRO_RAYOS;
+            const ang = getAngInicialCadaRayo(Settings.JUGADOR_INI.ANGULO_ROTACION_INI) + (incAng * i);
+            const distPlanoProy = (Settings.escenarioTotales.WIDTH_SCREEN / 2) / Math.tan(Settings.FOV_MITAD);
+
+            this.rayo.push(new Rayo(this, {
+
+                x: Settings.JUGADOR_INI.X,
+                y: Settings.JUGADOR_INI.Y,
+                anguloRotacion: Settings.JUGADOR_INI.ANGULO_ROTACION_INI,
+                incrAngulo: incAng,
+                angulo: ang,
+                wallHitX: 0,
+                wallHitY: 0,
+                wallHitXHorizontal: 0,
+                wallHitYHorizontal: 0,
+                wallHitXVertical: 0,
+                wallHitYVertical: 0,
+                columna: i,
+                distancia: 0,
+                pixelTextura: 0,
+                idTextura: 0,
+                valorTH: 0,
+                valorTV: 0,
+                distanciaPlanoProyeccion: distPlanoProy,
+                hCamara: 0
+            }));
+        }
     }
     
     preload()
@@ -58,7 +96,12 @@ export class Game extends Scene
         
         this.jugador.create();
         this.jugador.get().setVisible(true);
-        
+
+        for (let i = 0; i < Settings.NRO_RAYOS; i ++)
+        {
+            this.rayo[i].create();
+        }
+
         this.line1 = new Phaser.Geom.Line(260, 200, 450, 450);
         this.line2 = new Phaser.Geom.Line(300, 400, 500, 500);
 
@@ -77,6 +120,11 @@ export class Game extends Scene
     update()
     {
         this.jugador.update();
+
+        for (let i = 0; i < Settings.NRO_RAYOS; i ++)
+        {
+            this.rayo[i].update();
+        }
 
         if (Settings.getVariablesModo3D())
         {

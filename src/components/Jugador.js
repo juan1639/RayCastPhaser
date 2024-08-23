@@ -3,8 +3,7 @@ import { Escenario } from "./Escenario";
 import {
     play_sonidos,
     getEscalaFondos,
-    normalizaAngulo,
-    getRadianes
+    normalizaAngulo
 } from "../functions/Functions";
 
 export class Jugador
@@ -39,8 +38,8 @@ export class Jugador
         this.jugador.setData('alto', alto);
         this.jugador.setData('avanza', avanza);
         this.jugador.setData('gira', gira);
-        this.jugador.setData('anguloRotacion', getRadianes(anguloRotacion));
-        this.jugador.setData('velGiro', getRadianes(velGiro));
+        this.jugador.setData('anguloRotacion', anguloRotacion);
+        this.jugador.setData('velGiro', velGiro);
         this.jugador.setData('velMovimiento', velMovimiento);
 
         this.dibujaLineaDir();
