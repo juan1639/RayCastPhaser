@@ -2,6 +2,9 @@
 
 This is proyect about raycasting developed in JavaScript and Phaser
 
+https://juan1639.github.io/RayCastPhaser
+
+<img src="img-rayCast-phaser.png" alt="img snapshot"/>
 
 # Phaser Vite Template
 
