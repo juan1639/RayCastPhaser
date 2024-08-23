@@ -8,12 +8,21 @@ function getEscalaFondos(screenWidth, screenHeight, x, y)
 
 function getRadianes(grados)
 {
-  return (grados * Math.PI) / 180;
+  return grados * (Math.PI / 180);
 }
 
 function normalizaAngulo(angRotacion)
-{
-  if (angRotacion < 0) {
+{  
+  angRotacion = angRotacion % (2 * Math.PI);
+	
+	if (angRotacion < 0)
+  {
+		angRotacion = (2 * Math.PI) + angRotacion;	//si es negativo damos toda la vuelta en el otro sentido
+	}
+	
+	return angRotacion;
+
+  /* if (angRotacion < 0) {
     return angRotacion + Math.PI * 2;
   }
 
@@ -21,7 +30,7 @@ function normalizaAngulo(angRotacion)
     return angRotacion - Math.PI * 2;
   }
 
-  return angRotacion;
+  return angRotacion; */
 }
 
 function calculaDistanciaEntrePtos(whx, why, x, y)

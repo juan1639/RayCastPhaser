@@ -146,6 +146,7 @@ export class Settings
     
     // Lo Normal=1, mas distancia mejor rendimiento, peor aspecto
     static DISTANCIA_ENTRE_RAYOS = 1;
+    static GROSOR_LINEA_PSEUDO3D = 2;
     static NRO_RAYOS = Settings.escenarioTotales.WIDTH_SCREEN;
 
     static MODIFICACION_DIST_PLANO_PROYECCION = 0.5;// 1 = Default

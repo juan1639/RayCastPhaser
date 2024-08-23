@@ -124,11 +124,12 @@ export class Rayo {
     {
         this.rayo.anguloRotacion = this.relatedScene.jugador.get().getData('anguloRotacion');
 		
-		//this.angulo += jugador.getGira() * jugador.getVelGiro();
+		//this.rayo.angulo += this.relatedScene.jugador.get().getData('gira') * this.relatedScene.jugador.get().getData('velGiro');
 		/* this.angulo = new BigDecimal(this.anguloRotacion - Funciones.getRadianes(Settings.FOV_MITAD)).add(
 				this.incrAngulo.multiply(new BigDecimal(this.columna))); */
         
         this.rayo.angulo = (this.rayo.anguloRotacion - Settings.FOV_MITAD) + this.rayo.incrAngulo * this.rayo.columna;
+		//console.log(this.rayo.incrAngulo * this.rayo.columna);
 		
 	    this.rayo.angulo = normalizaAngulo(this.rayo.angulo);
 
@@ -186,7 +187,7 @@ export class Rayo {
 
             const lineaPseudo3D = new Phaser.Geom.Line(x, y0, x, y1);     
             //const lineaPseudo3D = new Phaser.Geom.Line(100, 100, 100, 400);     
-            this.relatedScene.graphics.lineStyle(2, colorPared);
+            this.relatedScene.graphics.lineStyle(Settings.GROSOR_LINEA_PSEUDO3D, colorPared);
             this.relatedScene.graphics.strokeLineShape(lineaPseudo3D);
        	}
         else
