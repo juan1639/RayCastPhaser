@@ -40,7 +40,7 @@ export class Game extends Scene
             //const i = 0;
             const incAng = Settings.FOV / Settings.NRO_RAYOS;
             const ang = getAngInicialCadaRayo(Settings.JUGADOR_INI.ANGULO_ROTACION_INI) + (incAng * i);
-            const distPlanoProy = (Settings.escenarioTotales.WIDTH_SCREEN / 2) / Math.tan(Settings.FOV_MITAD);
+            const distPlanoProy = (Settings.escenarioTotales.WIDTH_SCREEN / 2) / Math.tan(Settings.FOV_MITAD_GRADOS);
 
             this.rayo.push(new Rayo(this, {
 
@@ -145,6 +145,6 @@ export class Game extends Scene
 
     renderiza3D()
     {
-        
+
     }
 }

@@ -96,7 +96,7 @@ export class Rayo {
 			this.rayo.wallHitX = this.rayo.wallHitXHorizontal;
 	        this.rayo.wallHitY = this.rayo.wallHitYHorizontal;
 	        this.rayo.distancia = distanciaHorizontal;
-	        colorPared = Settings.colores.PARED_CLARO;
+	        colorPared = Settings.colores.hex.PARED_CLARO;
 	        
 	        // ********* LINEA DE LA TEXTURA a dibujar *******
 	        //casilla = Int(rayo(a).wallHitX / TILE_X) * TILE_X
@@ -108,7 +108,7 @@ export class Rayo {
 			this.rayo.wallHitX = this.rayo.wallHitXVertical;
 	        this.rayo.wallHitY = this.rayo.wallHitYVertical;
 	        this.rayo.distancia = distanciaVertical;
-	        colorPared = Settings.colores.PARED_OSCURO;
+	        colorPared = Settings.colores.hex.PARED_OSCURO;
 	        
 	        // ********* LINEA DE LA TEXTURA a dibujar *******
 	        //casilla = Int(rayo(a).wallHitY / TILE_Y) * TILE_Y
@@ -117,7 +117,7 @@ export class Rayo {
 		}
 		
 	    //this.distancia = Funciones.corregirOjoPez(this.distancia, this.anguloRotacion, this.angulo);
-        this.renderizaRayo();
+        this.renderizaRayo(colorPared);
     }
 
     actualizaRayo()
@@ -136,11 +136,8 @@ export class Rayo {
 	    this.rayo.y = this.relatedScene.jugador.get().y;
     }
 
-    renderizaRayo()
+    renderizaRayo(colorPared)
     {
-	    //const xD = this.rayo.wallHitX;
-	    //const yD = this.rayo.wallHitY;
-	    
 	    if (!Settings.getVariablesModo3D())
         {
 	    	//this.relatedScene.graphics.clear();
@@ -159,13 +156,43 @@ export class Rayo {
 	    }
         else
         {
-	    	this.renderParedPseudo3D();
+	    	this.renderParedPseudo3D(colorPared);
 	    }
     }
 
-    renderParedPseudo3D()
+    renderParedPseudo3D(colorPared)
     {
+        const altoTile = Settings.escenarioTotales.HEIGHT_SCREEN;
+		const alturaMuro = (altoTile / this.rayo.distancia) * this.rayo.distanciaPlanoProyeccion;
+		//console.log(altoTile, alturaMuro);
 
+	    const y0 = (Settings.escenarioTotales.HEIGHT_SCREEN / 2) - (alturaMuro / 2);
+	    const y1 = y0 + alturaMuro;
+	    //console.log(y0 + ": " + y1);
+	    
+	    const x = this.rayo.columna;
+	    const alturaLinea = Math.abs(y1 - y0);
+
+	    const altura = 0;
+	    const altoTextura = 64; // px
+	    const alturaTextura = y0 - y1;
+	    
+	    if (!Settings.getVariablesRenderConTextura())
+        {
+	    	//g.setColor(new Color(colorPared[0], colorPared[1], colorPared[2]));
+	        //g.drawLine(x, y0, x, y1);
+	    	//g.fillRect(x, y1, 1, alturaLinea);
+
+            const lineaPseudo3D = new Phaser.Geom.Line(x, y0, x, y1);     
+            //const lineaPseudo3D = new Phaser.Geom.Line(100, 100, 100, 400);     
+            this.relatedScene.graphics.lineStyle(2, colorPared);
+            this.relatedScene.graphics.strokeLineShape(lineaPseudo3D);
+       	}
+        else
+        {
+	        //idTxt = rayo(a).idTextura
+	        //_PutImage (x, y0)-(x, y1), texturaPared(idTxt), , (rayo(a).pixelTextura, 0)-Step(0, altoTextura)
+        }
     }
 
     colisionesHorizontales()

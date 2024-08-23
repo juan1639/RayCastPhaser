@@ -81,8 +81,8 @@ export class Jugador
             this.jugador.setData('gira', 1);
         }
             
-        console.log(this.jugador.getData('avanza'));
-        console.log(this.jugador.getData('gira'));
+        //console.log(this.jugador.getData('avanza'));
+        //console.log(this.jugador.getData('gira'));
     }
 
     actualiza()
@@ -93,7 +93,7 @@ export class Jugador
         const nuevaY = this.jugador.y + this.jugador.getData('avanza') * Math.sin(this.jugador.getData('anguloRotacion')) *
             this.jugador.getData('velMovimiento');
         
-        console.log(nuevaX, nuevaY);
+        //console.log(nuevaX, nuevaY);
         
         const tryX = Math.floor(nuevaX / Settings.escenarioMedidas.TILE_X);
         const tryY = Math.floor(nuevaY / Settings.escenarioMedidas.TILE_Y);

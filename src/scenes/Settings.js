@@ -65,8 +65,15 @@ export class Settings
         BLANCO: "245, 245, 245",
         NEGRO: "5, 5, 5",
         GRIS_SUELO: "70, 75, 75",
-        PARED_OSCURO: "150, 150, 150",
-        PARED_CLARO: "128, 128, 128",
+        PARED_CLARO: "150, 150, 150",
+        PARED_OSCURO: "128, 128, 128",
+        hex: {
+            BLANCO: 0xf2f2f2,
+            NEGRO: 0x111111,
+            GRIS_SUELO: 0X464a4a,
+            PARED_CLARO: 0x979797,
+            PARED_OSCURO: 0x7d7d7d
+        }
     };
 
     static audio =
@@ -134,6 +141,8 @@ export class Settings
 
     static FOV = getRadianes(60);
     static FOV_MITAD = Settings.FOV / 2;
+    static FOV_GRADOS = 60;
+    static FOV_MITAD_GRADOS = Settings.FOV_GRADOS / 2;
     
     // Lo Normal=1, mas distancia mejor rendimiento, peor aspecto
     static DISTANCIA_ENTRE_RAYOS = 1;
