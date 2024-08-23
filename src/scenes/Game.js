@@ -113,7 +113,7 @@ export class Game extends Scene
     {
         this.graphics.clear();
         this.jugador.update();
-
+        
         for (let i = 0; i < Settings.NRO_RAYOS; i ++)
         {
             this.rayo[i].update();

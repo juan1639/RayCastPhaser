@@ -128,7 +128,7 @@ export class Rayo {
 		/* this.angulo = new BigDecimal(this.anguloRotacion - Funciones.getRadianes(Settings.FOV_MITAD)).add(
 				this.incrAngulo.multiply(new BigDecimal(this.columna))); */
         
-        this.rayo.angulo = (this.rayo.anguloRotacion - Settings.FOV_MITAD) + this.rayo.incrAngulo * this.rayo.columna;
+        this.rayo.angulo = normalizaAngulo(this.rayo.anguloRotacion - Settings.FOV_MITAD) + this.rayo.incrAngulo * this.rayo.columna;
 		//console.log(this.rayo.incrAngulo * this.rayo.columna);
 		
 	    this.rayo.angulo = normalizaAngulo(this.rayo.angulo);
@@ -172,7 +172,7 @@ export class Rayo {
 	    const y1 = y0 + alturaMuro;
 	    //console.log(y0 + ": " + y1);
 	    
-	    const x = this.rayo.columna;
+	    const x = (Settings.escenarioTotales.WIDTH_SCREEN / Settings.NRO_RAYOS) * this.rayo.columna;
 	    const alturaLinea = Math.abs(y1 - y0);
 
 	    const altura = 0;

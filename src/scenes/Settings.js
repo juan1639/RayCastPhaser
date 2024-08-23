@@ -36,8 +36,8 @@ export class Settings
 		ALTO2D: 6,
 		AVANZA: 0,
 		GIRA_INI: 0,
-		ANGULO_ROTACION_INI: getRadianes(90),
-		VEL_GIRO: getRadianes(3),
+		ANGULO_ROTACION_INI: Phaser.Math.DegToRad(90),
+		VEL_GIRO: Phaser.Math.DegToRad(3),
 		VEL_MOVIMIENTO: 4,
     };
 
@@ -139,7 +139,7 @@ export class Settings
 		PUERTA: 5,
     };
 
-    static FOV = getRadianes(60);
+    static FOV = Phaser.Math.DegToRad(60);
     static FOV_MITAD = Settings.FOV / 2;
     static FOV_GRADOS = 60;
     static FOV_MITAD_GRADOS = Settings.FOV_GRADOS / 2;
@@ -147,6 +147,7 @@ export class Settings
     // Lo Normal=1, mas distancia mejor rendimiento, peor aspecto
     static DISTANCIA_ENTRE_RAYOS = 1;
     static GROSOR_LINEA_PSEUDO3D = 2;
+    //static NRO_RAYOS = 512;
     static NRO_RAYOS = Settings.escenarioTotales.WIDTH_SCREEN;
 
     static MODIFICACION_DIST_PLANO_PROYECCION = 0.5;// 1 = Default
