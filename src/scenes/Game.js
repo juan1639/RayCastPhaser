@@ -119,6 +119,7 @@ export class Game extends Scene
 
     update()
     {
+        this.graphics.clear();
         this.jugador.update();
 
         for (let i = 0; i < Settings.NRO_RAYOS; i ++)
@@ -144,13 +145,6 @@ export class Game extends Scene
 
     renderiza3D()
     {
-        Phaser.Geom.Line.Rotate(this.line1, 0.02);
-
-        this.graphics.clear();
-        //this.graphics.fillStyle(0xffffff);
-        this.graphics.lineStyle(2, 0x00ff00);
-        this.graphics.strokeLineShape(this.line1);
-        this.graphics.lineStyle(2, 0xffaa00);
-        this.graphics.strokeLineShape(this.line2);
+        
     }
 }

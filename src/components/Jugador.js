@@ -109,13 +109,11 @@ export class Jugador
         
         this.jugador.setData('anguloRotacion', normalizaAngulo(this.jugador.getData('anguloRotacion')));
 
-        this.dibujaLineaDir();
+        //this.dibujaLineaDir();
     }
 
     dibujaLineaDir()
     {
-        this.relatedScene.graphics.clear();
-
         this.lineaDir = new Phaser.Geom.Line(
             this.jugador.x,
             this.jugador.y,

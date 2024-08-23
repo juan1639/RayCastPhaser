@@ -24,6 +24,11 @@ function normalizaAngulo(angRotacion)
   return angRotacion;
 }
 
+function calculaDistanciaEntrePtos(whx, why, x, y)
+{
+  return Math.sqrt((x - whx) * (x - whx) + (y - why) * (y - why));
+}
+
 function getAngInicialCadaRayo(angRotacion)
 {
   return angRotacion - Settings.FOV_MITAD;
@@ -70,6 +75,7 @@ export {
   getEscalaFondos,
   getRadianes,
   normalizaAngulo,
+  calculaDistanciaEntrePtos,
   getAngInicialCadaRayo,
   particulas,
   play_sonidos
