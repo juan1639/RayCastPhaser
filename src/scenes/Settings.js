@@ -148,6 +148,8 @@ export class Settings
     static DISTANCIA_ENTRE_RAYOS = 1;
     static NRO_RAYOS = Settings.escenarioTotales.WIDTH_SCREEN;
 
+    static MODIFICACION_DIST_PLANO_PROYECCION = 0.5;// 1 = Default
+
     static NRO_TEXTURAS_PARED = 14;
 
     static estados =

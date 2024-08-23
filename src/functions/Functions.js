@@ -29,6 +29,11 @@ function calculaDistanciaEntrePtos(whx, why, x, y)
   return Math.sqrt((x - whx) * (x - whx) + (y - why) * (y - why));
 }
 
+function corregirOjoPez(distancia, angRotacion, angulo)
+{
+  return distancia * Math.cos(angRotacion - angulo);
+}
+
 function getAngInicialCadaRayo(angRotacion)
 {
   return angRotacion - Settings.FOV_MITAD;
@@ -76,6 +81,7 @@ export {
   getRadianes,
   normalizaAngulo,
   calculaDistanciaEntrePtos,
+  corregirOjoPez,
   getAngInicialCadaRayo,
   particulas,
   play_sonidos

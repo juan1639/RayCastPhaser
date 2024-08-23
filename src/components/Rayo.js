@@ -1,6 +1,6 @@
 import { Escenario } from "./Escenario";
 import { Settings } from "../scenes/Settings";
-import { normalizaAngulo, calculaDistanciaEntrePtos } from "../functions/Functions";
+import { normalizaAngulo, calculaDistanciaEntrePtos, corregirOjoPez } from "../functions/Functions";
 
 export class Rayo {
 
@@ -116,7 +116,7 @@ export class Rayo {
 	        //rayo(a).idTextura = 0 + rayo(a).valorTV + 10
 		}
 		
-	    //this.distancia = Funciones.corregirOjoPez(this.distancia, this.anguloRotacion, this.angulo);
+	    this.rayo.distancia = corregirOjoPez(this.rayo.distancia, this.rayo.anguloRotacion, this.rayo.angulo);
         this.renderizaRayo(colorPared);
     }
 
@@ -163,7 +163,8 @@ export class Rayo {
     renderParedPseudo3D(colorPared)
     {
         const altoTile = Settings.escenarioTotales.HEIGHT_SCREEN;
-		const alturaMuro = (altoTile / this.rayo.distancia) * this.rayo.distanciaPlanoProyeccion;
+		const alturaMuro = (altoTile / this.rayo.distancia) *
+            (this.rayo.distanciaPlanoProyeccion * Settings.MODIFICACION_DIST_PLANO_PROYECCION);
 		//console.log(altoTile, alturaMuro);
 
 	    const y0 = (Settings.escenarioTotales.HEIGHT_SCREEN / 2) - (alturaMuro / 2);
