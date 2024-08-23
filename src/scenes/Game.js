@@ -102,19 +102,11 @@ export class Game extends Scene
             this.rayo[i].create();
         }
 
-        this.line1 = new Phaser.Geom.Line(260, 200, 450, 450);
-        this.line2 = new Phaser.Geom.Line(300, 400, 500, 500);
-
-        this.graphics.lineStyle(2, 0x00ff00);
-        this.graphics.strokeLineShape(this.line1);
-        this.graphics.lineStyle(2, 0xffff00);
-        this.graphics.strokeLineShape(this.line2);
-
-        this.input.once('pointerdown', () => {
+        /* this.input.once('pointerdown', () => {
 
             play_sonidos(Settings.audio.numKey, false, 0.9);
             this.scene.start('GameOver');
-        });
+        }); */
     }
 
     update()
@@ -126,25 +118,5 @@ export class Game extends Scene
         {
             this.rayo[i].update();
         }
-
-        if (Settings.getVariablesModo3D())
-        {
-            this.renderiza3D();
-            
-        }
-        else
-        {
-            this.renderiza2D();
-        }
-    }
-
-    renderiza2D()
-    {
-
-    }
-
-    renderiza3D()
-    {
-
     }
 }
