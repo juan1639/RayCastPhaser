@@ -68,32 +68,34 @@ export class Rayo {
     {
         this.actualizaRayo();
 
-        const distanciaHorizontal = 9999;
-        const distanciaVertical = 9999;
+        let distanciaHorizontal = 9999;
+        let distanciaVertical = 9999;
 
         if (this.colisionesHorizontales())
         {
-            const whx = this.wallHitXHorizontal;
-            const why = this.wallHitYHorizontal;
+            const whx = this.rayo.wallHitXHorizontal;
+            const why = this.rayo.wallHitYHorizontal;
             const distanciaEntrePtos = calculaDistanciaEntrePtos(whx, why, this.rayo.x, this.rayo.y);
             distanciaHorizontal = distanciaEntrePtos;
+            //console.log(distanciaHorizontal);
         }
 
         if (this.colisionesVerticales())
         {
-            const whx = this.wallHitXVertical;
-            const why = this.wallHitYVertical;
+            const whx = this.rayo.wallHitXVertical;
+            const why = this.rayo.wallHitYVertical;
             const distanciaEntrePtos = calculaDistanciaEntrePtos(whx, why, this.rayo.x, this.rayo.y);
             distanciaVertical = distanciaEntrePtos;
+            //console.log(distanciaVertical);
         }
 
         let colorPared;
 
         if (distanciaHorizontal < distanciaVertical) {
 			
-			this.wallHitX = this.wallHitXHorizontal;
-	        this.wallHitY = this.wallHitYHorizontal;
-	        this.distancia = distanciaHorizontal;
+			this.rayo.wallHitX = this.rayo.wallHitXHorizontal;
+	        this.rayo.wallHitY = this.rayo.wallHitYHorizontal;
+	        this.rayo.distancia = distanciaHorizontal;
 	        colorPared = Settings.colores.PARED_CLARO;
 	        
 	        // ********* LINEA DE LA TEXTURA a dibujar *******
@@ -103,9 +105,9 @@ export class Rayo {
 		}
         else
         {
-			this.wallHitX = this.wallHitXVertical;
-	        this.wallHitY = this.wallHitYVertical;
-	        this.distancia = distanciaVertical;
+			this.rayo.wallHitX = this.rayo.wallHitXVertical;
+	        this.rayo.wallHitY = this.rayo.wallHitYVertical;
+	        this.rayo.distancia = distanciaVertical;
 	        colorPared = Settings.colores.PARED_OSCURO;
 	        
 	        // ********* LINEA DE LA TEXTURA a dibujar *******
@@ -136,8 +138,8 @@ export class Rayo {
 
     renderizaRayo()
     {
-	    const xD = this.rayo.wallHitX;
-	    const yD = this.rayo.wallHitY;
+	    //const xD = this.rayo.wallHitX;
+	    //const yD = this.rayo.wallHitY;
 	    
 	    if (!Settings.getVariablesModo3D())
         {
@@ -146,8 +148,10 @@ export class Rayo {
             const lineaRayo = new Phaser.Geom.Line(
                 this.rayo.x,
                 this.rayo.y,
-                this.rayo.x + Math.cos(this.rayo.angulo) * 80,
-                this.rayo.y + Math.sin(this.rayo.angulo) * 80
+                this.rayo.wallHitX,
+                this.rayo.wallHitY
+                //this.rayo.x + Math.cos(this.rayo.angulo) * 80,
+                //this.rayo.y + Math.sin(this.rayo.angulo) * 80
             );
 
             this.relatedScene.graphics.lineStyle(2, 0xff9900);
@@ -218,18 +222,19 @@ export class Rayo {
 	    
 	    // -------------------------------------------------------------------
 	    //  BUCLE para BUSCAR el PTO de COLISION (Horizontal)
+        //  
 	    // -------------------------------------------------------------------
 	    do {
 	        casillaX = Math.floor(siguienteXHorizontal / Settings.escenarioMedidas.TILE_X);
 	        casillaY = Math.floor(siguienteYHorizontal / Settings.escenarioMedidas.TILE_Y);
 	        
-	        if (Escenario.checkColision(casillaX, casillaY))
+	        if (Escenario.checkColisionVsRayo(casillaX, casillaY))
             {
 	        	
 	            colisionH = true;
 	            //this.valorTH = valorTile(casillaX, casillaY);
-	            this.wallHitXHorizontal = siguienteXHorizontal;
-	            this.wallHitYHorizontal = siguienteYHorizontal;
+	            this.rayo.wallHitXHorizontal = siguienteXHorizontal;
+	            this.rayo.wallHitYHorizontal = siguienteYHorizontal;
 	            return true;
            	}
             else
@@ -246,7 +251,82 @@ export class Rayo {
 
     colisionesVerticales()
     {
+        let colisionV = false;
 
+	    let xIntercept = 0;
+	    let yIntercept = 0;
+	    
+	    let opuesto;
+
+	    let xStep = 0;
+	    let yStep = 0;
+	    
+	    // Buscamos la 1ra INSTERSECCION VERTICAL
+	    xIntercept = Math.floor(this.rayo.x / Settings.escenarioMedidas.TILE_X) * Settings.escenarioMedidas.TILE_X;
+	
+	    // Si apunta hacia la DCHA, INCREMENTAMOS 1 Tile
+	    if (!this.haciaIzquierda(this.rayo.angulo))
+        {
+	    	xIntercept += Settings.escenarioMedidas.TILE_X;
+	    }
+	    
+	    // Se le SUMA el CATETO OPUESTO
+	    opuesto = (xIntercept - this.rayo.x) * Math.tan(this.rayo.angulo);
+	    yIntercept = this.rayo.y + opuesto;
+	    
+	    // Calcular los STEPs
+	    xStep = Settings.escenarioMedidas.TILE_X;
+	
+	    // SI vamos a la IZQUIERDA, INVERTIMOS
+	    if (this.haciaIzquierda(this.rayo.angulo))
+        {
+	    	xStep *= -1;
+	    }
+	
+	    yStep = Settings.escenarioMedidas.TILE_X * Math.tan(this.rayo.angulo);
+	
+	    if ((!this.haciaAbajo(this.rayo.angulo) && yStep > 0) || (this.haciaAbajo(this.rayo.angulo) && yStep < 0))
+        {
+	    	yStep *= -1;
+	    }
+	
+	    let siguienteXVertical = xIntercept;
+	    let siguienteYVertical = yIntercept;
+	    
+	    // Si apunta hacia la IZQUIERDA, forzamos -1 PIXEL
+	    if (this.haciaIzquierda(this.rayo.angulo))
+        {
+	    	siguienteXVertical -= 1;
+	    }
+	    
+	    let casillaX;
+	    let casillaY;
+	    
+	    // -------------------------------------------------------------------
+	    //  BUCLE para BUSCAR el PTO de COLISION (Vertical)
+	    // -------------------------------------------------------------------
+	    do {
+	        casillaX = Math.floor(siguienteXVertical / Settings.escenarioMedidas.TILE_X);
+	        casillaY = Math.floor(siguienteYVertical / Settings.escenarioMedidas.TILE_Y);
+	        
+	        if (Escenario.checkColisionVsRayo(casillaX, casillaY))
+            {
+	            colisionV = true;
+	            //this.valorTV = valorTile(casillaX, casillaY);
+	            this.rayo.wallHitXVertical = siguienteXVertical;
+	            this.rayo.wallHitYVertical = siguienteYVertical;
+	            return true;
+	        }
+            else
+            {
+	        	siguienteXVertical = siguienteXVertical + xStep;
+	        	siguienteYVertical = siguienteYVertical + yStep;
+	        }
+	
+	    } while (!colisionV && casillaX < Settings.escenarioMedidas.NRO_COLUMNAS &&
+	    		casillaY < Settings.escenarioMedidas.NRO_FILAS && casillaX >= 0 && casillaY >= 0);
+		
+		return false;
     }
 
     haciaAbajo(angulo)

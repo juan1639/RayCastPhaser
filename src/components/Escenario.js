@@ -33,8 +33,26 @@ export class Escenario {
 
     static checkColision(x, y)
     {
-        if (Settings.arrayEscenario[y][x] > 0) return true;
+        if (Settings.arrayEscenario[y][x] > 0)
+        {
+            return true;
+        }
         return false;
+    }
+
+    static checkColisionVsRayo(x, y)
+    {
+        if (x >= Settings.escenarioMedidas.NRO_COLUMNAS || y >= Settings.escenarioMedidas.NRO_FILAS || x < 0 || y < 0)
+        {
+			return false;
+		}
+		
+		if (Settings.arrayEscenario[y][x] > 0)
+        {
+			return true;
+		}
+		
+		return false;
     }
 
     get()
